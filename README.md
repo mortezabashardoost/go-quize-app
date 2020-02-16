@@ -1,2 +1,2 @@
-# go-rest-api
+# go-quize-app
 This is a application build with golang, jwt, gorm, mysql
