@@ -1,4 +1,4 @@
-module github.com/mortezabashardoost/go-rest-api
+module github.com/mortezabashardoost/go-quize-app
 
 go 1.13
 
