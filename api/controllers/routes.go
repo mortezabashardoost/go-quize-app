@@ -1,10 +1,10 @@
 package controllers
 
 import (
-	"github.com/mortezabashardoost/go-quize-app/api/middlewares"
+	"go-quize-app/api/middlewares"
 )
 
-func (server *Server) InitializeRoutes() {
+func (s *Server) initializeRoutes() {
 	// Home Route
 	s.Router.HandleFunc("/", middlewares.SetMiddlewareJSON(s.Home)).Methods("GET")
 

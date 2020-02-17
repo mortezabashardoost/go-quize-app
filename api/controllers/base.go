@@ -7,17 +7,17 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 
-	"github.com/jinzhu/gorm/dialects/mysql"
-	"github.com/mortezabashardoost/go-quize-app/models"
+	"go-quize-app/api/models"
 )
 
 type Server struct {
-	DB		*gorm.DB
-	Router	*mux.Router
+	DB     *gorm.DB
+	Router *mux.Router
 }
 
-func (server *Server) Initialize (Dbdriver, DbUser, DbPassword, DbPort, DbHost, DbName string)  {
+func (server *Server) Initialize(Dbdriver, DbUser, DbPassword, DbPort, DbHost, DbName string) {
 	var err error
 	if Dbdriver == "mysql" {
 		DBURL := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local", DbUser, DbPassword, DbHost, DbPort, DbName)

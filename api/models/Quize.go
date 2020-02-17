@@ -1,9 +1,9 @@
 package models
 
 import (
-	"errors"
+	//"errors"
 	//"html"
-	"strings"
+	//"strings"
 	"time"
 
 	"github.com/jinzhu/gorm"

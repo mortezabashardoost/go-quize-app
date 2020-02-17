@@ -5,13 +5,14 @@ import (
 	"log"
 	"os"
 
+	"go-quize-app/api/controllers"
+
 	"github.com/joho/godotenv"
-	"github.com/mortezabashardoost/go-quize-app/api/controllers"
 )
 
 var server = controllers.Server{}
 
-func Run()  {
+func Run() {
 	var err error
 	err = godotenv.Load()
 	if err != nil {

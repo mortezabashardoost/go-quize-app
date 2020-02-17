@@ -2,26 +2,23 @@ package controllers
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"strconv"
 
-	"github.com/gorilla/mux"
-	"github.com/mortezabashardoost/go-quize-app/api/responses"
-	"github.com/mortezabashardoost/go-quize-app/api/models"
+	"go-quize-app/api/models"
+	"go-quize-app/api/responses"
 )
 
-func (server *Server) CreateQuize (w http.ResponseWriter, r *http.Requst) {
+func (server *Server) CreateQuize(w http.ResponseWriter, r *http.Request) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		responses.ERROR(w, http.StatusUnprocessableEntity, err)
 		return
 	}
 	quize := models.Quize{}
-	err := json.Unmarshal(body,&Quize)
-	if err := nil {
+	err = json.Unmarshal(body, &quize)
+	if err != nil {
 		responses.ERROR(w, http.StatusUnprocessableEntity, err)
 		return
 	}
@@ -41,11 +38,11 @@ func (server *Server) CreateQuize (w http.ResponseWriter, r *http.Requst) {
 	// 	responses.ERROR(w, http.StatusUnauthorized, errors.New(http.StatusText(http.StatusUnauthorized)))
 	// 	return
 	// }
-	quizeCreated, err := quize.SavePost(server.DB)
+	quizeCreated, err := quize.SaveQuize(server.DB)
 	if err != nil {
 		responses.ERROR(w, http.StatusInternalServerError, err)
 		return
 	}
 	w.Header().Set("Lacation", fmt.Sprintf("%s%s/%d", r.Host, r.URL.Path, quizeCreated.QuizeId))
-	responses.JSON(w, http.StatusCreated, postCreated)
+	responses.JSON(w, http.StatusCreated, quizeCreated)
 }
