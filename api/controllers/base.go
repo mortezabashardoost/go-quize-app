@@ -2,14 +2,13 @@ package controllers
 
 import (
 	"fmt"
+	"go-quize-app/api/models"
 	"log"
 	"net/http"
 
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
-
-	"go-quize-app/api/models"
 )
 
 type Server struct {
@@ -26,12 +25,11 @@ func (server *Server) Initialize(Dbdriver, DbUser, DbPassword, DbPort, DbHost, D
 			fmt.Printf("Cannot connect to %s database", Dbdriver)
 			log.Fatal("This is the error:", err)
 		} else {
-			fmt.Printf("We are connected to the %s database", Dbdriver)
+			fmt.Printf("DB connection established...")
 		}
 	}
 	// TODO: add other models
-	//server.DB.Debug().AutoMigrate(&models.User{}, &models.Post{}) //database migration
-	server.DB.Debug().AutoMigrate(&models.Quize{})
+	server.DB.Debug().AutoMigrate(&models.Quize{}, &models.User{}) //database migration
 	server.Router = mux.NewRouter()
 	server.initializeRoutes()
 }
